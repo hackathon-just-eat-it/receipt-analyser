@@ -8,10 +8,10 @@ class Recomender:
     
     def __init__(self, filename):
         self.filename = filename;
-        self.data = pd.read_csv(filename)[['id','0']]
+        self.data = pd.read_csv(filename)[['id','0',' time']]
         self.data['0'] = self.data['0'].transform(transfo)
       
     
     def recommend(self, uservector):
         recoms = self.data[self.data['id'].isin(uservector) == True]['0'].values[0]
-        return [{'id':self.data.iloc[rec]['id']} for rec in recoms]
+        return [{'id':self.data.iloc[rec]['id'], 'time':self.data.iloc[rec][' time']} for rec in recoms]
